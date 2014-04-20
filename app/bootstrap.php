@@ -109,7 +109,7 @@ $app->container->singleton('log', function () use ($app) {
 	if ( ! file_exists($logfile)) {
 		mkdir($logpath, 0777, TRUE);
 		file_put_contents($logfile, '');
-		chmod($logfile, 0664);
+		chmod($logfile, 0777);
 	}
 
     $log = new \Monolog\Logger(strtoupper($app->request->getHost()));
