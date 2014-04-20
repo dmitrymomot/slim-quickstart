@@ -16,6 +16,7 @@
         "php":">=5.3.0",
         "monolog/monolog": "*",
         "league/plates": "*",
+        "robmorgan/phinx": "*",
         "slim/slim": "2.*"
     },
     "require-dev":{
@@ -26,6 +27,7 @@
         "leafo/lessphp": "*",
         "monolog/monolog": "*",
         "mobiledetect/mobiledetectlib": "*",
+        "nategood/httpful": "*",
         "pagerfanta/pagerfanta": "*",
         "j4mie/paris": "*",
         "Respect/Validation": "*",
