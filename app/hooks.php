@@ -1,6 +1,9 @@
 <?php
 
-
+/**
+ * Encode body data to Content-Type format
+ * @todo handler for all formats
+ */
 $app->hook('slim.after.dispatch', function () use ($app) {
 
         $defaults = array(
@@ -10,7 +13,7 @@ $app->hook('slim.after.dispatch', function () use ($app) {
             'text/csv',
         );
 
-        $contentType = $app->response->headers->get('Content-Type');
+		$contentType = $app->response->header('Content-Type');
 
         if (in_array($contentType, $defaults))
 		{
@@ -18,18 +21,24 @@ $app->hook('slim.after.dispatch', function () use ($app) {
 		}
 });
 
+/**
+ * Set response as JSON if request is AJAX
+ */
 $app->hook('slim.before.router', function () use ($app) {
 
 	if ($app->request->isAjax())
 	{
-		$app->response->headers->set('Content-Type', 'application/json');
+		$app->response->header('Content-Type', 'application/json');
 	}
 });
 
+/**
+ * show time and memory
+ */
 $app->hook('slim.after', function () use ($app) {
 
 	$contentTypes = array('plain/text', 'text/html');
-	$contentType = $app->response->headers->get('Content-Type');
+	$contentType = $app->response->header('Content-Type');
 
 	if (in_array($contentType, $contentTypes))
 	{
