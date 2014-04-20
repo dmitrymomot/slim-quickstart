@@ -26,14 +26,20 @@ class Welcome extends Controller
 		$model = new Model\Welcome;
 		$response = $model->sayHelloUser($this->param('name', 'guest'));
 
-		$engine = new \League\Plates\Engine(APPPATH.'views');
-
-		$view = new \League\Plates\Template($engine);
+		$view = $this->app->view();
 		$view->title = $response;
 		$view->content = 'Content: '.$response;
-		$view = $view->render('hello');
+		$this->app->render('hello.php');
 
-		$this->response->body($view);
+		// $this->response->body($view);
+	}
+
+	public function actionExternal()
+	{
+		$url = $this->param('url', 'none');
+		$model = new Model\Welcome;
+		$response = $model->getExternal($url);
+		$this->response->body($response);
 	}
 
 	public function after()

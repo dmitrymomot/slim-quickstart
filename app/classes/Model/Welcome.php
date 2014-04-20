@@ -15,4 +15,10 @@ class Welcome extends Model {
 	{
 		return 'Hello '.ucfirst($username).'!';
 	}
+
+	public function getExternal($url)
+	{
+		$response = \Httpful\Request::get($url)->send();
+		return $response;
+	}
 }

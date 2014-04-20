@@ -35,14 +35,17 @@ $app->hook('slim.before.router', function () use ($app) {
 /**
  * show time and memory
  */
-$app->hook('slim.after', function () use ($app) {
+if ($app->config('debug'))
+{
+	$app->hook('slim.after', function () use ($app) {
 
-	$contentTypes = array('plain/text', 'text/html');
-	$contentType = $app->response->header('Content-Type');
+		$contentTypes = array('plain/text', 'text/html');
+		$contentType = $app->response->header('Content-Type');
 
-	if (in_array($contentType, $contentTypes))
-	{
-		$data = "<hr/>Time: ".round((microtime(TRUE) - START_TIME), 3)." sec; Memory: ".sprintf('%01.2f', (((memory_get_usage() - START_MEMORY) / 1024) / 1024))." MB";
-		echo $data;
-	}
-});
+		if (in_array($contentType, $contentTypes))
+		{
+			$data = "<hr/>Time: ".round((microtime(TRUE) - START_TIME), 3)." sec; Memory: ".sprintf('%01.2f', (((memory_get_usage() - START_MEMORY) / 1024) / 1024))." MB";
+			echo $data;
+		}
+	});
+}
