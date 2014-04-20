@@ -1,0 +1,9 @@
+/vendor/
+/app/cache/
+!/app/cache/.gitkeep
+/app/logs/
+!/app/logs/.gitkeep
+/public/uploads/
+!/public/uploads/.gitkeep
+composer.lock
+*.fuse_hidden*

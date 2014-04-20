@@ -1,0 +1,45 @@
+{
+    "name": "dimkof/slim-quickstart",
+    "description": "Slim Framework Quickstart",
+    "keywords": ["Slim Framework", "framework", "slim", "quickstart"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Momot",
+            "email": "mail@dmomot.com"
+        }
+    ],
+	"config": {
+		"vendor-dir": "vendor"
+	},
+    "require":{
+        "php":">=5.3.0",
+        "monolog/monolog": "*",
+        "league/plates": "*",
+        "slim/slim": "2.*"
+    },
+    "require-dev":{
+        "php":">=5.3.0",
+        "codeguy/upload": "*",
+        "imagine/imagine": "*",
+        "league/plates": "*",
+        "leafo/lessphp": "*",
+        "monolog/monolog": "*",
+        "mobiledetect/mobiledetectlib": "*",
+        "pagerfanta/pagerfanta": "*",
+        "j4mie/paris": "*",
+        "Respect/Validation": "*",
+        "robmorgan/phinx": "*",
+        "slim/slim": "2.*",
+        "symfony/console": "*",
+        "swiftmailer/swiftmailer": "*",
+        "willdurand/geocoder": "@stable",
+
+        "twbs/bootstrap":"*"
+    },
+    "autoload": {
+        "psr-4": {
+			"App\\": ["app/classes/"]
+		}
+    }
+}
