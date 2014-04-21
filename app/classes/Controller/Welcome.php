@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use \App\Controller;
 use \App\Model;
+use \Slim\MVC;
 
-class Welcome extends Controller
+class Welcome extends MVC\Controller
 {
 	public function before()
 	{
@@ -24,13 +25,19 @@ class Welcome extends Controller
 
 	public function actionBlog()
 	{
-		// var_dump(property_exists('\App\Model\Post', '_table'));
-		$model = Model::factory('Post')
-			->where('id', 1)
-			->find_array();
+		$model = MVC\Model::factory('Post')->find_many();
+		$this->app->render('blog.php', array('posts' => $model, 'title' => 'Blog'));
+	}
 
-		var_dump($model);
-		// $this->response->body($response);
+	public function actionPost()
+	{
+		$model = MVC\Model::factory('Post')
+			->where('url', $this->param('url'))
+			->find_one();
+
+		$data = (is_object($model)) ? $model->as_array() : $model;
+
+		$this->app->render('post.php', $data);
 	}
 
 	public function actionHello()

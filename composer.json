@@ -12,25 +12,42 @@
 	"config": {
 		"vendor-dir": "vendor"
 	},
+	"scripts": {
+		"post-install-cmd": [
+
+		],
+		"post-update-cmd": [
+			"rm -rf app/cache/*"
+		],
+		"post-create-project-cmd": [
+			"mkdir -pv app/cache",
+			"mkdir -pv app/clases/Controller",
+			"mkdir -pv app/clases/Model",
+			"mkdir -pv app/config",
+			"mkdir -pv app/logs",
+			"mkdir -pv app/views",
+			"chmod -Rvf 777 app/cache",
+			"chmod -Rvf 777 app/logs",
+			"chmod 775 public"
+		]
+	},
     "require":{
         "php":">=5.3.0",
-        "dimkof/idiormparis": "*",
         "monolog/monolog": "*",
-        "league/plates": "*",
-        "robmorgan/phinx": "*",
-        "slim/slim": "2.*"
+        "slim/slim": "2.*",
+        "slim-extensions/mvc": "dev-master"
     },
     "require-dev":{
         "php":">=5.3.0",
         "codeguy/upload": "*",
         "imagine/imagine": "*",
-        "league/plates": "*",
+        "j4mie/paris":"dev-develop",
+        "league/plates": "2.*",
         "leafo/lessphp": "*",
         "monolog/monolog": "*",
         "mobiledetect/mobiledetectlib": "*",
         "nategood/httpful": "*",
         "pagerfanta/pagerfanta": "*",
-        "j4mie/paris": "*",
         "Respect/Validation": "*",
         "robmorgan/phinx": "*",
         "slim/slim": "2.*",

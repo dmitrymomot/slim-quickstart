@@ -15,7 +15,8 @@ $app->get('/get(/:url)', function ($name = null) use ($app) {
 	$controller->execute('actionExternal');
 })->conditions(array('url' => '.+'));
 
-$app->get('/blog', function () use ($app) {
+$app->get('/blog(/(:url))', function ($url = null) use ($app) {
 	$controller = new \App\Controller\Welcome($app);
-	$controller->execute('actionBlog');
-});
+	$action = ($url) ? 'actionPost' : 'actionBlog';
+	$controller->execute($action);
+})->conditions(array('url' => '[0-9a-zA-Z-]++'));
