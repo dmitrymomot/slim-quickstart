@@ -8,6 +8,8 @@
 		<title><?php echo $this->title;?></title>
 	</head>
 	<body>
-		<?php echo $this->content();?>
+		<div class="container">
+			<?php echo $this->content();?>
+		</div>
 	</body>
 </html>

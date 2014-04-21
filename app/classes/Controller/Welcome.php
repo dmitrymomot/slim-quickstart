@@ -18,7 +18,19 @@ class Welcome extends Controller
 	{
 		$model = new Model\Welcome;
 		$response = $model->getTestData('Hello World!');
+
 		$this->response->body($response);
+	}
+
+	public function actionBlog()
+	{
+		// var_dump(property_exists('\App\Model\Post', '_table'));
+		$model = Model::factory('Post')
+			->where('id', 1)
+			->find_array();
+
+		var_dump($model);
+		// $this->response->body($response);
 	}
 
 	public function actionHello()

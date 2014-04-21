@@ -21,4 +21,22 @@ class Welcome extends Model {
 		$response = \Httpful\Request::get($url)->send();
 		return $response;
 	}
+
+	public function testORM()
+	{
+		// A named connection, where 'remote' is an arbitrary key name
+		\IdiormParis\ORM::configure('mysql:host=localhost;dbname=slim_test');
+		\IdiormParis\ORM::configure('username', 'slim_test');
+		\IdiormParis\ORM::configure('password', 'slim_test');
+
+		$posts = \IdiormParis\ORM::for_table('posts')->find_many();
+
+		foreach ($posts as $post)
+		{
+			var_dump($post->title);
+		}
+
+
+		// var_dump($posts);
+	}
 }

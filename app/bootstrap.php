@@ -112,6 +112,12 @@ $app->container->singleton('log', function () use ($app) {
 		chmod($logfile, 0777);
 	}
 
+	if ( ! is_writable($logpath) || ! is_writable($logfile))
+	{
+		chmod($logpath, 0777);
+		chmod($logfile, 0777);
+	}
+
     $log = new \Monolog\Logger(strtoupper($app->request->getHost()));
     $log->pushHandler(new \Monolog\Handler\StreamHandler($logfile, \Monolog\Logger::DEBUG));
     return $log;
