@@ -5,7 +5,7 @@
  */
 if ( ! defined('START_TIME'))
 {
-	define('START_TIME', microtime(TRUE));
+	define('START_TIME', microtime(true));
 }
 
 /**
@@ -81,7 +81,7 @@ if ( ! function_exists('_loadConfig')) {
  * Prepare app
  */
 $app = new \Slim\Slim(_loadConfig('app/general'));
-$app->setName('Slim Framework Quickstart');
+// $app->setName('Slim Framework Quickstart');
 
 /**
  * Only invoked if mode is "production"
@@ -107,7 +107,7 @@ $app->container->singleton('log', function () use ($app) {
 	$logfile = $logpath.'/'.date('d').'.log';
 
 	if ( ! file_exists($logfile)) {
-		mkdir($logpath, 0777, TRUE);
+		mkdir($logpath, 0777, true);
 		file_put_contents($logfile, '');
 		chmod($logfile, 0777);
 	}
