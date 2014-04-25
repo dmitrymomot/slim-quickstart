@@ -2,11 +2,14 @@
     "name": "dmitrymomot/slim-quickstart",
     "description": "Slim Framework Quickstart",
     "keywords": ["Slim Framework", "framework", "slim", "quickstart"],
+    "homepage": "http://dmitrymomot.com/",
     "license": "MIT",
     "authors": [
         {
-            "name": "Dmitry Momot",
-            "email": "mail@dmomot.com"
+            "name": 	"Dmitry Momot",
+			"homepage": "http://dmitrymomot.com/",
+            "email": 	"mail@dmomot.com",
+            "role": 	"developer"
         }
     ],
 	"config": {
