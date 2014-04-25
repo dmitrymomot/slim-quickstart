@@ -10,7 +10,7 @@ Slim-Quickstart is available via Composer:
 
 ```cli
 $ cd /path/to/your/project
-$ composer create-project dmitrymomot/slim-quickstart ./ ~1.0
+$ composer create-project --no-dev dmitrymomot/slim-quickstart ./ ~1.0
 ```
 
 ## License
