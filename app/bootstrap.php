@@ -100,6 +100,7 @@ $app->configureMode('development', function () use ($app) {
 /**
  * Create monolog logger and store logger in container as singleton
  * (Singleton resources retrieve the same log resource definition each time)
+ * @todo set custom error handler
  */
 $app->container->singleton('log', function () use ($app) {
 
@@ -107,19 +108,15 @@ $app->container->singleton('log', function () use ($app) {
 	$logfile = $logpath.'/'.date('d').'.log';
 
 	if ( ! file_exists($logfile)) {
+		$old = umask(0);
 		mkdir($logpath, 0777, true);
 		file_put_contents($logfile, '');
 		chmod($logfile, 0777);
-	}
-
-	if ( ! is_writable($logpath) || ! is_writable($logfile))
-	{
-		chmod($logpath, 0777);
-		chmod($logfile, 0777);
+		umask($old);
 	}
 
     $log = new \Monolog\Logger(strtoupper($app->request->getHost()));
-    $log->pushHandler(new \Monolog\Handler\StreamHandler($logfile, \Monolog\Logger::DEBUG));
+    $log->pushHandler(new \Monolog\Handler\StreamHandler($logfile, \Monolog\Logger::DEBUG, true, 0777));
     return $log;
 });
 
@@ -127,10 +124,13 @@ $app->container->singleton('log', function () use ($app) {
  * Error handle
  */
 $app->error(function (\Exception $e) use ($app) {
+	$app->applyHook('log.request.info', $e->getMessage());
+	$app->log->error($e);
     $app->render('error.php');
 });
 
 $app->notFound(function () use ($app) {
+	$app->applyHook('log.request.info', 'Page not found');
     $app->render('404.php');
 });
 

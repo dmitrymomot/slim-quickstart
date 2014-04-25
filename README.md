@@ -8,12 +8,9 @@ Slim Framework Quickstart
 
 Slim-Quickstart is available via Composer:
 
-```json
-{
-    "require": {
-        "dimkof/slim-quickstart": "dev-master"
-    }
-}
+```cli
+$ cd /path/to/your/project
+$ composer create-project dmitrymomot/slim-quickstart ./ ~1.0
 ```
 
 ## License
