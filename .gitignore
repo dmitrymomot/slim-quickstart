@@ -1,4 +1,5 @@
 /vendor/
+/devlib/
 /app/cache/*
 !/app/cache/.gitkeep
 /app/logs/*
