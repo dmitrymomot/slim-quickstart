@@ -107,13 +107,21 @@ $app->container->singleton('log', function () use ($app) {
 	$logpath = APPPATH.'logs/'.date('Y/m');
 	$logfile = $logpath.'/'.date('d').'.log';
 
-	if ( ! file_exists($logfile)) {
-		$old = umask(0);
+	$old = umask(0);
+
+	if ( ! is_dir($logpath)) {
 		mkdir($logpath, 0777, true);
-		file_put_contents($logfile, '');
-		chmod($logfile, 0777);
-		umask($old);
 	}
+
+	if ( ! is_writable($logpath)) {
+		chmod($logfile, 0777);
+	}
+
+	if ( ! file_exists($logfile)) {
+		file_put_contents($logfile, '');
+	}
+
+	umask($old);
 
     $log = new \Monolog\Logger(strtoupper($app->request->getHost()));
     $log->pushHandler(new \Monolog\Handler\StreamHandler($logfile, \Monolog\Logger::DEBUG, true, 0777));
