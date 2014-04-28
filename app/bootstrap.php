@@ -1,22 +1,6 @@
 <?php
 
 /**
- * Define the start time of the application, used for profiling.
- */
-if ( ! defined('START_TIME'))
-{
-	define('START_TIME', microtime(true));
-}
-
-/**
- * Define the memory usage at the start of the application, used for profiling.
- */
-if ( ! defined('START_MEMORY'))
-{
-	define('START_MEMORY', memory_get_usage());
-}
-
-/**
  * Set the PHP error reporting level. If you set this in php.ini, you remove this.
  * @link http://www.php.net/manual/errorfunc.configuration#ini.error-reporting
  *
@@ -55,6 +39,20 @@ setlocale(LC_ALL, 'en_EN.utf-8');
 mb_substitute_character('none');
 
 /**
+ * Define the start time of the application, used for profiling.
+ */
+if ( ! defined('START_TIME')) {
+	define('START_TIME', microtime(true));
+}
+
+/**
+ * Define the memory usage at the start of the application, used for profiling.
+ */
+if ( ! defined('START_MEMORY')) {
+	define('START_MEMORY', memory_get_usage());
+}
+
+/**
  * Define path to classes of application
  */
 if ( ! defined('APPPATH')) {
@@ -66,6 +64,11 @@ if ( ! defined('APPPATH')) {
  */
 require DOCROOT.'../vendor/autoload.php';
 
+/**
+ * Load connfig from file
+ * @param string $config
+ * @return array
+ */
 if ( ! function_exists('_loadConfig')) {
 	function _loadConfig($config) {
 		$file = APPPATH.'config'.DIRECTORY_SEPARATOR.$config.'.php';
@@ -75,7 +78,6 @@ if ( ! function_exists('_loadConfig')) {
 		return array();
 	}
 }
-
 
 /**
  * Prepare app
@@ -125,8 +127,14 @@ $app->container->singleton('log', function () use ($app) {
 
     $log = new \Monolog\Logger(strtoupper($app->request->getHost()));
     $log->pushHandler(new \Monolog\Handler\StreamHandler($logfile, \Monolog\Logger::DEBUG, true, 0777));
+
     return $log;
 });
+
+/**
+ * Register handlers
+ */
+\Monolog\ErrorHandler::register($app->log);
 
 /**
  * Error handle
@@ -142,6 +150,7 @@ $app->notFound(function () use ($app) {
     $app->render('404.php');
 });
 
+// throw new \Exception('test error');
 /**
  * Define hooks
  */

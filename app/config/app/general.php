@@ -14,7 +14,7 @@ return array(
 
 	// View
 	'templates.path' 	=> APPPATH.'views',
-	'view' 				=> '\Slim\MVC\View',
+	'view' 				=> '\Slim\Extension\View',
 
 	// Cookies
 	'cookies.encrypt' 	=> true,
