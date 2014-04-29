@@ -24,8 +24,8 @@
 		],
 		"post-create-project-cmd": [
 			"mkdir -pv app/cache",
-			"mkdir -pv app/clases/Controller",
-			"mkdir -pv app/clases/Model",
+			"mkdir -pv app/classes/Controller",
+			"mkdir -pv app/classes/Model",
 			"mkdir -pv app/config",
 			"mkdir -pv app/logs",
 			"mkdir -pv app/views",
@@ -66,14 +66,7 @@
     },
     "autoload": {
         "psr-4": {
-			"App\\": "app/classes/",
-			"Auth\\": "devlib/dmitrymomot/php-auth/src/",
-			"Helper\\": "devlib/dmitrymomot/cookie-helper/src/",
-			"Session\\": "devlib/dmitrymomot/php-session/src/",
-			"Slim\\Extension\\": [
-				"devlib/dmitrymomot/slim-mvc/src/",
-				"devlib/dmitrymomot/slim-widgets/src/"
-			]
+			"App\\": "app/classes/"
 		}
     },
     "extra": {
